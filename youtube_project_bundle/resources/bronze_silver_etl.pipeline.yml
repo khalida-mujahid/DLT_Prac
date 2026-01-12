@@ -1,0 +1,19 @@
+# The main pipeline for youtube_project_bundle
+
+resources:
+  pipelines:
+    bronze_silver_etl:
+      name: Bronze_Silver
+      configuration:
+        catalog_name: ${var.catalog}
+      libraries:
+        - glob:
+            include: ../src/DLT_pipelines/Bronze_Silver/transformations/**
+      schema: youtubesilver
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: ${var.catalog}
+      serverless: true
+      root_path: ../src/DLT_pipelines/Bronze_Silver
